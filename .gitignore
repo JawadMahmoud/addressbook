@@ -1,3 +1,6 @@
 .vscode
 django22
 contacts_project/db.sqlite3
+contacts_project/contacts_project/__pycache__
+contacts_project/contactsapp/__pycache__
+contacts_project/contactsapp/migrations
