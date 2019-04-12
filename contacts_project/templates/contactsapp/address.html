@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Contact</title>
+    </head>
+    <body>
+        {% if con %}
+        <h1>{{ con.name }}</h1>
+        <div>
+            <a href="/contacts/organization/{{ org.slug }}">{{ org.name }}</a>
+        </div>
+        <div>
+            <div>
+                <ul>
+                    <li>{{ con.address }}</li>
+                    <li>{{ con.city }}</li>
+                    <li>{{ con.country }}</li>
+                    <li>{{ con.phone }}</li>
+                    <li>{{ con.email }}</li>
+                    <li>{{ con.role }}</li>
+                </ul>
+            </div>
+        </div>
+        {% else %}
+            <strong>This contact does not exist.</strong>
+        {% endif %}
+        <div>
+            <a href="/contacts/">Index</a><br />
+            <a href="/contacts/about/">About</a><br />
+        </div>
+    </body>
+</html>

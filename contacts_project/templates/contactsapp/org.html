@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <title>Organization</title>
+    </head>
+    <body>
+        <h1>{{ org.name }}</h1>
+        <div>
+            <strong>{{ org.address }}</strong><br />
+        </div>
+        <div>
+            <div>
+                {% if con %}
+                <ul>
+                    {% for c in con %}
+                        <li><a href="/contacts/organization/{{ org.slug }}/{{ c.id }}">{{ c.name }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <strong>There are no contacts present.</strong>
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <a href="/contacts/">Index</a><br />
+            <a href="/contacts/about/">About</a><br />
+        </div>
+    </body>
+</html>

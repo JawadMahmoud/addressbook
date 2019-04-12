@@ -7,14 +7,22 @@
         <title>Address Book</title>
     </head>
     <body>
-        <h1>Your Contacts</h1>
+        <h1>Organizations</h1>
         <div>
-            hey there partner! <br />
-            <strong>{{ boldmessage }}</strong><br />
+            <div>
+                {% if orgs %}
+                <ul>
+                    {% for o in orgs %}
+                        <li><a href="/contacts/organization/{{ o.slug }}">{{ o.name }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                    <strong>There are no organizations present.</strong>
+                {% endif %}
+            </div>
         </div>
         <div>
             <a href="/contacts/about/">About</a><br />
-            <img src="{% static "images/contacts_icon.png" %}" alt="Contacts Icon" />
         </div>
     </body>
 </html>
