@@ -1,9 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 
-# Create your models here.
-
-
+## Model of an Organization
 class Organization(models.Model):
     name = models.CharField(max_length=128, unique=True, null=False)
     email = models.CharField(max_length=128, unique=True)
@@ -20,7 +18,7 @@ class Organization(models.Model):
         self.slug = slugify(self.name)
         super(Organization, self).save(*args, **kwargs)
 
-
+## Model of a Contact
 class Contact(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128, unique=True, null=False)

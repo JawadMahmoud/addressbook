@@ -2,6 +2,10 @@
 {% extends 'contactsapp/base.html' %}
 {% load staticfiles %}
 
+{% block title_block %}
+    AddressBook - Organization
+{% endblock title_block %}
+
 {% block body_block %}
     <section role="main">
         <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
@@ -17,6 +21,7 @@
                 <h5>{{ org.email }}</h5>
                 <div>
                     <a type="button" class="btn btn-outline-warning" href="/contacts/edit_org/{{ org.slug }}">Edit</a>
+                    <a type="button" class="btn btn-outline-danger" href="/contacts/del_org/{{ org.slug }}">Delete</a>
                 </div>
             </div>
         </div>

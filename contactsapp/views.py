@@ -4,13 +4,13 @@ from contactsapp.models import Organization, Contact
 from contactsapp.forms import OrganizationForm, ContactForm
 from django.template.defaultfilters import slugify
 
-
+## Homepage
 def index(request):
     context_dict = {}
 
     return render(request, 'contactsapp/index.html', context=context_dict)
 
-
+## Render the organizations page, shows all companies and filtering options
 def show_org_all(request):
     context_dict = {}
     
@@ -33,11 +33,11 @@ def show_org_all(request):
 
     return render(request, 'contactsapp/company.html', context=context_dict)
 
-
+## About page
 def about(request):
     return render(request, 'contactsapp/about.html', {})
 
-
+## Renders and organization's page, displaying all its details and options
 def show_org(request, org_slug):
     context_dict = {}
 
@@ -55,6 +55,7 @@ def show_org(request, org_slug):
 
     return render(request, "contactsapp/org.html", context=context_dict)
 
+## Renders and contact's card, displaying all their details and options
 def show_con(request, c_id):
     context_dict = {}
 
@@ -72,7 +73,7 @@ def show_con(request, c_id):
 
     return render(request, "contactsapp/address.html", context=context_dict)
 
-
+## Form for adding a new Organization
 def add_org(request):
     form = OrganizationForm()
 
@@ -87,6 +88,7 @@ def add_org(request):
 
     return render(request, "contactsapp/addorg.html", {'form' : form})
 
+## Form for adding a new Contact
 def add_con(request):
     form = ContactForm()
 
@@ -101,6 +103,7 @@ def add_con(request):
 
     return render(request, "contactsapp/addcon.html", {'form' : form})
 
+## Form for editing the chosen Contact's details
 def edit_con(request, c_id):
 
     context_dict = {}
@@ -135,6 +138,7 @@ def edit_con(request, c_id):
 
     return render(request, "contactsapp/editcon.html", context_dict)
 
+## Form for editing the chosen Organization's details
 def edit_org(request, org_slug):
 
     context_dict = {}
@@ -166,6 +170,7 @@ def edit_org(request, org_slug):
 
     return render(request, "contactsapp/editorg.html", context_dict)
 
+## Deletes the selected Organization
 def del_org(request, org_slug):
 
     context_dict = {}
@@ -175,8 +180,9 @@ def del_org(request, org_slug):
     except Organization.DoesNotExist:
         return redirect('index')
 
-    return redirect('index')
+    return redirect('show_org_all')
 
+## Deletes the selected Contact
 def del_con(request, c_id):
 
     context_dict = {}
@@ -191,6 +197,7 @@ def del_con(request, c_id):
 
     return redirect('show_org', this_slug)
 
+## Renders page for displaying all Contacts, and filtering options
 def show_con_all(request):
 
     context_dict = {}
@@ -215,6 +222,7 @@ def show_con_all(request):
 
     return render(request, "contactsapp/addresses.html", context=context_dict)
 
+## Renders Contacts filtered by first letter
 def show_con_alpha(request, alphabet):
 
     context_dict = {}
@@ -240,6 +248,7 @@ def show_con_alpha(request, alphabet):
 
     return render(request, "contactsapp/addresses.html", context=context_dict)
 
+## Renders Contacts filtered by role
 def show_con_roles(request, role):
 
     context_dict = {}
@@ -265,6 +274,7 @@ def show_con_roles(request, role):
 
     return render(request, "contactsapp/addresses.html", context=context_dict)
 
+## Renders Organizations filtered by first letter
 def show_org_alpha(request, alphabet):
     context_dict = {}
     
@@ -289,6 +299,7 @@ def show_org_alpha(request, alphabet):
 
     return render(request, 'contactsapp/company.html', context=context_dict)
 
+## Renders Organizations filtered by locale
 def show_org_nation(request, nation):
     context_dict = {}
     
@@ -313,6 +324,7 @@ def show_org_nation(request, nation):
 
     return render(request, 'contactsapp/company.html', context=context_dict)
 
+## Performs a search on both Organizations and Contacts and displays results relative to the input text query
 def search(request):
     context_dict = {}
     ## Searches TV Show objects that contain a specific query
@@ -337,6 +349,7 @@ def search(request):
     else:
         return
 
+## Resets the logo of an Organization
 def remove_logo(request, org_slug):
 
     context_dict = {}
@@ -348,6 +361,7 @@ def remove_logo(request, org_slug):
 
     return redirect('show_org', org_slug)
 
+## Resets the picture of a Contact
 def remove_pic(request, c_id):
 
     context_dict = {}

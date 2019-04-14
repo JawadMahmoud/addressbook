@@ -2,6 +2,10 @@
 {% extends 'contactsapp/base.html' %}
 {% load staticfiles %}
 
+{% block title_block %}
+    AddressBook - Organizations
+{% endblock title_block %}
+
 {% block body_block %}
     <section role="main">
         <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
@@ -57,7 +61,7 @@
                             {% endif %}
                         <h2><a href="{% url 'show_org' o.slug %}">{{ o.name }}</a></h2>
                         <a type="button" class="btn btn-outline-warning" href="/contacts/edit_org/{{ o.slug }}"><i class="fas fa-edit"></i></a>
-                        <a type="button" class="btn btn-outline-danger" href="#"><i class="fas fa-trash"></i></a>
+                        <a type="button" class="btn btn-outline-danger" href="/contacts/del_org/{{ o.slug }}"><i class="fas fa-trash"></i></a>
                     </div><!-- /.col-lg-4 -->
                     {% if forloop.counter|divisibleby:3 %}
                     </div>

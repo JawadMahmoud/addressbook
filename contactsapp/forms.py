@@ -1,6 +1,7 @@
 from django import forms
 from contactsapp.models import Organization, Contact
 
+## Form of an Organization
 class OrganizationForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Name:")
     email = forms.CharField(max_length=128, required=False, help_text="Email:")
@@ -14,7 +15,7 @@ class OrganizationForm(forms.ModelForm):
         model = Organization
         fields = ('name', 'email', 'address', 'city', 'country', 'logo',)
 
-
+## Model of a Contact
 class ContactForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text="Name:")
     address = forms.CharField(max_length=128, required=False, help_text="Address:")

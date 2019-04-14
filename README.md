@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ```
 
 - A migrated database is already included in the repo, so no migrations are required for the demo
-- Run a local server 
+- Run a local server
 
 ```shell
 python manage.py runserver
