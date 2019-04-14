@@ -6,25 +6,46 @@
     <section role="main">
         <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
             <div class="col-sm-8 mx-auto text-center">
-                {% if org.logo == '' %}
-                    <span style="color: indigo;"><i class="far fa-building fa-9x"></i></span>
+                {% if alpha %}
+                <h1>Contacts - {{ alpha }}</h1>
                 {% else %}
-                    <img src="{{ org.logo.url }}" width="140" height="140" style="border-radius: 20%"></img>
+                {% if role %}
+                <h1>Contacts - {{ role }}</h1>
+                {% else %}
+                <h1>Contacts</h1>
                 {% endif %}
-                <h1>{{ org.name }}</h1>
-                <h5>{{ org.address }}</h5>
-                <h5>{{ org.city }}, {{ org.country }}</h5>
-                <h5>{{ org.email }}</h5>
+                {% endif %}
                 <div>
                     <a type="button" class="btn btn-outline-success" href="/contacts/new_con/">Add</a>
-                    <a type="button" class="btn btn-outline-warning" href="/contacts/edit_org/{{ org.slug }}">Edit</a>
+                </div>
+                <div class="btn-group text-center">
+                    <div class="dropdown" style="margin-top: 0.5rem; margin-right: 0.5rem">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Name
+                        </button>
+                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton" style="height: auto; max-height: 100px; overflow-x: hidden;">
+                            {% for a in alphas %}
+                                <a class="dropdown-item" href="{% url 'show_con_alpha' a %}">{{ a }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="dropdown" style="margin-top: 0.5rem">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Role
+                        </button>
+                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton" style="height: auto; max-height: 100px; overflow-x: hidden;">
+                            {% for r in roles %}
+                                <a class="dropdown-item" href="{% url 'show_con_roles' r %}">{{ r }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="jumbotron text-center"> 
-            {% if con %}
-            {% for c in con %}
+            {% if cons %}
+            {% for c in cons %}
                 {% if forloop.first %}
                     <div class="row">
                 {% endif %}
@@ -40,6 +61,7 @@
                         <a type="button" class="btn btn-outline-danger" href="/contacts/del_con/{{ c.id }}"><i class="fas fa-trash"></i></a>
                         <div class="collapse multi-collapse" id="multiCollapse{{ c.id }}">
                             <div class="card card-body" style="margin-top: 1rem; background-color: #777; color: white;">
+                                <h4><strong>{{ c.company }}</strong></h4>
                                 <p><strong>{{ c.role }}</strong></p>
                                 <p>{{ c.phone }}</p>
                                 <p>{{ c.email }}</p>

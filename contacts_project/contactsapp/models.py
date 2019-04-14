@@ -10,7 +10,7 @@ class Organization(models.Model):
     address = models.CharField(max_length=128, null=True)
     city = models.CharField(max_length=128, null=True)
     country = models.CharField(max_length=128, null=True)
-    logo = models.ImageField(upload_to='org_logos', blank=True)
+    logo = models.ImageField(upload_to='org_logos/', blank=True)
     slug = models.SlugField(blank=True, unique=True)
 
     def __str__(self):
@@ -31,7 +31,7 @@ class Contact(models.Model):
     email = models.CharField(max_length=128, unique=True, null=True)
     role = models.CharField(max_length=64, null=True)
     company = models.ForeignKey(Organization, on_delete=models.SET_NULL, null=True)
-    picture = models.ImageField(upload_to='con_dps', blank=True)
+    picture = models.ImageField(upload_to='con_dps/', blank=True)
 
     def __str__(self):
         return self.name

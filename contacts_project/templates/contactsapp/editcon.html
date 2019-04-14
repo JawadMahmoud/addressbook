@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends 'contactsapp/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <section role="main">
+    <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
+        <div class="col-sm-8 mx-auto text-center">
+            <h1>Edit Contact</h1>
+        </div>
+    </div>
+
+    <div class="jumbotron text-center"> 
+        <form id="edit_contact_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {% comment %} {{ field.errors }} {% endcomment %}
+                <label for="{{ field.help_text }}">{{ field.help_text }}</label>
+                {{ field }}
+                <br/>
+            {% endfor %}
+            <input class="btn btn-info" type="submit" name="submit" value="Edit Contact" />
+        </form>
+    </div>
+
+{% endblock %}

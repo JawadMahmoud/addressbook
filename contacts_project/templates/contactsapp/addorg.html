@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends 'contactsapp/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <section role="main">
+    <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
+        <div class="col-sm-8 mx-auto text-center">
+            <h1>Add an Organization</h1>
+        </div>
+    </div>
+
+    <div class="jumbotron text-center"> 
+        <form id="organization_form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                <label for="{{ field.help_text }}">{{ field.help_text }}</label>
+                {{ field }}
+                <br/>
+            {% endfor %}
+            <input class="btn btn-success" type="submit" name="submit" value="Create Organization" />
+        </form>
+    </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends 'contactsapp/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <section role="main">
+        <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
+            <div class="col-sm-8 mx-auto text-center">
+                <h1>Organizations</h1>
+                <div>
+                    <a type="button" class="btn btn-outline-success" href="/contacts/new_org/">New</a>
+                </div>
+                <div class="btn-group text-center">
+                    <div class="dropdown" style="margin-top: 0.5rem; margin-right: 0.5rem">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Name
+                        </button>
+                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton" style="height: auto; max-height: 100px; overflow-x: hidden;">
+                            {% for a in alphas %}
+                                <a class="dropdown-item" href="{% url 'show_org_alpha' a %}">{{ a }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="dropdown" style="margin-top: 0.5rem; margin-right: 0.5rem">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Locale
+                        </button>
+                        <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton" style="height: auto; max-height: 100px; overflow-x: hidden;">
+                            {% for n in nations %}
+                                <a class="dropdown-item" href="{% url 'show_org_nation' n %}">{{ n }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="jumbotron text-center"> 
+            {% if orgs %}
+            {% for o in orgs %}
+                {% if forloop.first %}
+                    <div class="row">
+                {% endif %}
+                    <div class="col-lg-4">
+                            {% if o.logo == '' %}
+                                <span style="color: cornflowerblue;"><i class="far fa-building fa-8x"></i></span>
+                            {% else %}
+                                <img src="{{ o.logo.url }}" width="140" height="140" style="border-radius: 20%"></img>
+                            {% endif %}
+                        <h2><a href="{% url 'show_org' o.slug %}">{{ o.name }}</a></h2>
+                        <a type="button" class="btn btn-outline-warning" href="/contacts/edit_org/{{ o.slug }}"><i class="fas fa-edit"></i></a>
+                        <a type="button" class="btn btn-outline-danger" href="#"><i class="fas fa-trash"></i></a>
+                    </div><!-- /.col-lg-4 -->
+                    {% if forloop.counter|divisibleby:3 %}
+                    </div>
+                    <hr class="featurette-divider">
+                    <div class="row">
+                    {% endif %}
+                    {% if forloop.last %}</div>{% endif %}
+            {% endfor %}
+            {% else %}
+                <strong>There are no organizations present.</strong>
+            {% endif %}
+        </div>
+
+    </section>
+
+{% endblock body_block %}

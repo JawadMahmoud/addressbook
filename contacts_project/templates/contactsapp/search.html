@@ -6,25 +6,41 @@
     <section role="main">
         <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
             <div class="col-sm-8 mx-auto text-center">
-                {% if org.logo == '' %}
-                    <span style="color: indigo;"><i class="far fa-building fa-9x"></i></span>
-                {% else %}
-                    <img src="{{ org.logo.url }}" width="140" height="140" style="border-radius: 20%"></img>
-                {% endif %}
-                <h1>{{ org.name }}</h1>
-                <h5>{{ org.address }}</h5>
-                <h5>{{ org.city }}, {{ org.country }}</h5>
-                <h5>{{ org.email }}</h5>
-                <div>
-                    <a type="button" class="btn btn-outline-success" href="/contacts/new_con/">Add</a>
-                    <a type="button" class="btn btn-outline-warning" href="/contacts/edit_org/{{ org.slug }}">Edit</a>
-                </div>
+                <h1>Search Results</h1>
+                <p><strong>{{ query }}</strong></p>
             </div>
         </div>
 
         <div class="jumbotron text-center"> 
-            {% if con %}
-            {% for c in con %}
+            {% if orgs %}
+            <h2>Organizations</h2>
+            {% for o in orgs %}
+                {% if forloop.first %}
+                    <div class="row">
+                {% endif %}
+                    <div class="col-lg-4">
+                            {% if o.logo == '' %}
+                                <span style="color: cornflowerblue;"><i class="far fa-building fa-8x"></i></span>
+                            {% else %}
+                                <img src="{{ o.logo.url }}" width="140" height="140" style="border-radius: 20%"></img>
+                            {% endif %}
+                        <h2><a href="{% url 'show_org' o.slug %}">{{ o.name }}</a></h2>
+                        <a type="button" class="btn btn-outline-warning" href="/contacts/edit_org/{{ o.slug }}"><i class="fas fa-edit"></i></a>
+                        <a type="button" class="btn btn-outline-danger" href="#"><i class="fas fa-trash"></i></a>
+                    </div><!-- /.col-lg-4 -->
+                    {% if forloop.counter|divisibleby:3 %}
+                    </div>
+                    <br/>
+                    <div class="row">
+                    {% endif %}
+                    {% if forloop.last %}</div>{% endif %}
+            {% endfor %}
+            {% else %}
+            {% endif %}
+            <hr class="featurette-divider">
+            {% if cons %}
+            <h2>Contacts</h2>
+            {% for c in cons %}
                 {% if forloop.first %}
                     <div class="row">
                 {% endif %}
@@ -50,15 +66,15 @@
                     </div><!-- /.col-lg-4 -->
                     {% if forloop.counter|divisibleby:3 %}
                     </div>
-                    <hr class="featurette-divider">
+                    <br/>
                     <div class="row">
                     {% endif %}
                     {% if forloop.last %}</div>{% endif %}
             {% endfor %}
             {% else %}
-                <strong>There are no contacts present.</strong>
             {% endif %}
         </div>
 
     </section>
-{% endblock %}
+
+{% endblock body_block %}

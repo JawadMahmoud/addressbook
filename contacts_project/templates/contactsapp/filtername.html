@@ -4,42 +4,41 @@
 
 {% block body_block %}
     <section role="main">
-        <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
+        <div class="jumbotron" style="background-color:white;">
             <div class="col-sm-8 mx-auto text-center">
-                {% if org.logo == '' %}
-                    <span style="color: indigo;"><i class="far fa-building fa-9x"></i></span>
-                {% else %}
-                    <img src="{{ org.logo.url }}" width="140" height="140" style="border-radius: 20%"></img>
-                {% endif %}
-                <h1>{{ org.name }}</h1>
-                <h5>{{ org.address }}</h5>
-                <h5>{{ org.city }}, {{ org.country }}</h5>
-                <h5>{{ org.email }}</h5>
+                <h1>Contacts - {{ alpha }}</h1>
                 <div>
                     <a type="button" class="btn btn-outline-success" href="/contacts/new_con/">Add</a>
-                    <a type="button" class="btn btn-outline-warning" href="/contacts/edit_org/{{ org.slug }}">Edit</a>
+                    <a type="button" class="btn btn-outline-danger" href="#">Remove</a>
+                </div>
+                <div class="dropdown" style="margin-top: 0.5rem">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Name
+                    </button>
+                    <div class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuButton" style="height: auto; max-height: 200px; overflow-x: hidden;">
+                        {% for a in alphas %}
+                            <a class="dropdown-item" href="{% url 'show_con_alpha' a %}">{{ a }}</a>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="jumbotron text-center"> 
-            {% if con %}
-            {% for c in con %}
+            {% if cons %}
+            {% for c in cons %}
                 {% if forloop.first %}
                     <div class="row">
                 {% endif %}
                     <div class="col-lg-4">
-                        {% if c.picture == '' %}
-                            <span style="color: cornflowerblue;"><i class="fas fa-user fa-8x"></i></span>
-                        {% else %}
-                            <img src="{{ c.picture.url }}" width="140" height="140" style="border-radius: 20%"></img>
-                        {% endif %}
+                        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
                         <h2>{{ c.name }}</h2>
                         <a class="btn btn-outline-success" data-toggle="collapse" href="#multiCollapse{{ c.id }}" role="button" aria-expanded="false" aria-controls="multiCollapse{{ c.id }}"><i class="fas fa-eye"></i></a>
                         <a type="button" class="btn btn-outline-warning" href="/contacts/edit_con/{{ c.id }}"><i class="fas fa-edit"></i></a>
                         <a type="button" class="btn btn-outline-danger" href="/contacts/del_con/{{ c.id }}"><i class="fas fa-trash"></i></a>
                         <div class="collapse multi-collapse" id="multiCollapse{{ c.id }}">
                             <div class="card card-body" style="margin-top: 1rem; background-color: #777; color: white;">
+                                <h4><strong>{{ c.company }}</strong></h4>
                                 <p><strong>{{ c.role }}</strong></p>
                                 <p>{{ c.phone }}</p>
                                 <p>{{ c.email }}</p>

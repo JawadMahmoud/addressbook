@@ -1,28 +1,14 @@
 <!DOCTYPE html>
-
+{% extends 'contactsapp/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Address Book</title>
-    </head>
-    <body>
-        <h1>Organizations</h1>
-        <div>
-            <div>
-                {% if orgs %}
-                <ul>
-                    {% for o in orgs %}
-                        <li><a href="/contacts/organization/{{ o.slug }}">{{ o.name }}</a></li>
-                    {% endfor %}
-                </ul>
-                {% else %}
-                    <strong>There are no organizations present.</strong>
-                {% endif %}
-            </div>
+{% block body_block %}
+    <section role="main">
+
+        <div class="jumbotron text-center"  style="margin-top: 1rem"> 
+            <h1>Welcome Back!</h1>
         </div>
-        <div>
-            <a href="/contacts/about/">About</a><br />
-        </div>
-    </body>
-</html>
+
+    </section>
+
+{% endblock body_block %}

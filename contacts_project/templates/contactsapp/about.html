@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% extends 'contactsapp/base.html' %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <section role="main">
+
+        <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
+            <div class="col-sm-8 mx-auto text-center">
+                <h1>About</h1>
+                <h3>Developed by: Jawad Mahmoud</h3>
+                <a href="https://github.com/JawadMahmoud" style="color: indigo"><i class="fab fa-github fa-2x"></i></a>
+                <p>A simple, minimal contact and address book management web application developed using Python and Django</p>
+            </div>
+        </div>
+
+        <div class="jumbotron text-center"  style="margin-top: 1rem"> 
+            <h3>Credits</h3>
+            <a href="https://fontawesome.com/" style="color: black"><i class="fab fa-font-awesome fa-2x"></i></a>
+            <a href="https://getbootstrap.com/" style="color: black"><i class="fab fa-bootstrap fa-2x"></i></a>
+        </div>
+
+    </section>
+{% endblock body_block %}

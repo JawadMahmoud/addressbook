@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" 
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" 
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+        crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" 
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" 
+        crossorigin="anonymous"></script>
+        <link href="{% static "css/fab.css" %}" type="text/css" rel="stylesheet" /><link>
+
+        <title>
+        {% block title_block %}
+        {% endblock title_block %}
+        </title>
+    </head>
+    <body>
+        <br/>
+        <div class="container">
+            <div>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light rounded sticky-top">
+                    <a class="navbar-brand" href="{% url 'index' %}"><i class="fas fa-address-book"></i> AddressBook</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarsExample09">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url 'show_org_all' %}">Organizations</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url 'show_con_all' %}">Contacts</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown09">
+                                <a class="dropdown-item" href="/contacts/new_org/">Organization</a>
+                                <a class="dropdown-item" href="/contacts/new_con/">Contact</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}">About</a>
+                        </li>
+                    </ul>
+                        <form class="form-inline my-2 my-md-0" method='GET' action='/contacts/search/'>
+                            <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="query">
+                        </form>
+                    </div>
+                </nav>                
+            </div>
+        <div>
+            {% block body_block %}
+            {% endblock body_block %}
+        </div>
+
+        </div>
+    </body>
+</html>

@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-
+{% extends 'contactsapp/base.html' %}
 {% load staticfiles %}
 
-<html>
-    <head>
-        <title>Contact</title>
-    </head>
-    <body>
+{% block body_block %}
+    <div>
         {% if con %}
         <h1>{{ con.name }}</h1>
         <div>
-            <a href="/contacts/organization/{{ org.slug }}">{{ org.name }}</a>
+            <a href="{% url 'show_org' org.slug %}">{{ org.name }}</a>
         </div>
         <div>
             <div>
@@ -24,12 +21,17 @@
                 </ul>
             </div>
         </div>
+        <br/>
+        <div>
+            <a href="/contacts/edit_con/{{ con.id }}">Edit</a>
+            <a href="/contacts/del_con/{{ con.id }}">Delete</a>
+        </div>
         {% else %}
             <strong>This contact does not exist.</strong>
         {% endif %}
         <div>
-            <a href="/contacts/">Index</a><br />
-            <a href="/contacts/about/">About</a><br />
+            <a href="{% url 'index' %}">Index</a><br />
+            <a href="{% url 'about' %}">About</a><br />
         </div>
-    </body>
-</html>
+    </div>
+{% endblock %}
