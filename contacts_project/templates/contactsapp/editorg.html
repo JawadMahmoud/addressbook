@@ -7,6 +7,19 @@
     <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
         <div class="col-sm-8 mx-auto text-center">
             <h1>Edit Organization</h1>
+
+            {% if this_org.logo == '' %}
+                <span style="color: indigo;"><i class="far fa-building fa-9x"></i></span>
+            {% else %}
+                <img src="{{ this_org.logo.url }}" width="140" height="140" style="border-radius: 20%"></img>
+            {% endif %}
+
+            {% if this_org.logo != '' %}
+            <div>
+                <br/>
+                <a type="button" class="btn btn-outline-warning" href="/contacts/remove_logo/{{ this_org.slug }}">Reset Logo</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 
@@ -23,6 +36,7 @@
                 <br/>
             {% endfor %}
             <input class="btn btn-info" type="submit" name="submit" value="Edit Organization" />
+            <a type="button" class="btn btn-outline-dark" href="/contacts/organization/{{ this_org.slug }}">Cancel</a>
         </form>
     </div>
 {% endblock %}

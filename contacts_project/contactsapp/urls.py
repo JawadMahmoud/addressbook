@@ -29,4 +29,6 @@ urlpatterns = [
     url(r'^del_con/(?P<c_id>[\w\-]+)/$',
         views.del_con, name='del_con'),
     url(r'^search/', views.search, name='search'),
+    url(r'^remove_pic/(?P<c_id>[\w\-]+)/$', views.remove_pic, name='remove_pic'),
+    url(r'^remove_logo/(?P<org_slug>[\w\-]+)/$', views.remove_logo, name='remove_logo'),
 ]

@@ -336,3 +336,25 @@ def search(request):
         return render(request, 'contactsapp/search.html', context_dict)
     else:
         return
+
+def remove_logo(request, org_slug):
+
+    context_dict = {}
+
+    o = Organization.objects.get(slug=org_slug)
+    o.logo = ""
+
+    o.save()
+
+    return redirect('show_org', org_slug)
+
+def remove_pic(request, c_id):
+
+    context_dict = {}
+
+    c = Contact.objects.get(id=c_id)
+    c.picture = ""
+
+    c.save()
+
+    return redirect('show_con', c_id)

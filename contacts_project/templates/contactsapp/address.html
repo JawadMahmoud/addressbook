@@ -3,35 +3,36 @@
 {% load staticfiles %}
 
 {% block body_block %}
-    <div>
-        {% if con %}
-        <h1>{{ con.name }}</h1>
-        <div>
-            <a href="{% url 'show_org' org.slug %}">{{ org.name }}</a>
-        </div>
-        <div>
-            <div>
-                <ul>
-                    <li>{{ con.address }}</li>
-                    <li>{{ con.city }}</li>
-                    <li>{{ con.country }}</li>
-                    <li>{{ con.phone }}</li>
-                    <li>{{ con.email }}</li>
-                    <li>{{ con.role }}</li>
-                </ul>
+    <section role="main">
+        <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
+            <div class="col-sm-8 mx-auto text-center">
+                {% if con.picture == '' %}
+                    <span style="color: indigo;"><i class="far fa-user fa-9x"></i></span>
+                {% else %}
+                    <img src="{{ con.picture.url }}" width="140" height="140" style="border-radius: 20%"></img>
+                {% endif %}
+                <h1>{{ con.name }}</h1>
+                <h2>{{ con.role }}</h2>
+                <h3><a href="{% url 'show_org' org.slug %}">{{ org.name }}</a></h3>
+                <div>
+                    <a type="button" class="btn btn-outline-warning" href="/contacts/edit_con/{{ con.id }}">Edit</a>
+                </div>
             </div>
         </div>
-        <br/>
-        <div>
-            <a href="/contacts/edit_con/{{ con.id }}">Edit</a>
-            <a href="/contacts/del_con/{{ con.id }}">Delete</a>
+
+
+        <div class="jumbotron">
+            <div class="col-sm-8 mx-auto text-center">
+                <i class="fas fa-map-marker-alt fa-2x"></i>
+                <p style="margin: 0">{{ con.address }}</p>
+                <p>{{ con.city }}, {{ con.country }}</p>
+
+                <i class="fas fa-phone fa-2x"></i>
+                <p>{{ con.phone }}</p>
+
+                <i class="fas fa-envelope fa-2x"></i>
+                <p>{{ con.email }}</p>
         </div>
-        {% else %}
-            <strong>This contact does not exist.</strong>
-        {% endif %}
-        <div>
-            <a href="{% url 'index' %}">Index</a><br />
-            <a href="{% url 'about' %}">About</a><br />
-        </div>
-    </div>
+    </section>
+
 {% endblock %}

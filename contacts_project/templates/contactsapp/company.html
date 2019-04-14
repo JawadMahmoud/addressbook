@@ -6,7 +6,15 @@
     <section role="main">
         <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
             <div class="col-sm-8 mx-auto text-center">
+                {% if nation %}
+                <h1>Organizations - {{ nation }}</h1>
+                {% else %}
+                {% if alpha %}
+                <h1>Organizations - {{ alpha }}</h1>
+                {% else %}
                 <h1>Organizations</h1>
+                {% endif %}
+                {% endif %}
                 <div>
                     <a type="button" class="btn btn-outline-success" href="/contacts/new_org/">New</a>
                 </div>

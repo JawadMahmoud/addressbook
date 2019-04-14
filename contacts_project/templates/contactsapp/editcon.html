@@ -7,6 +7,19 @@
     <div class="jumbotron" style="background-color:white; padding: 1rem 2rem">
         <div class="col-sm-8 mx-auto text-center">
             <h1>Edit Contact</h1>
+
+            {% if this_contact.picture == '' %}
+                <span style="color: indigo;"><i class="far fa-user fa-9x"></i></span>
+            {% else %}
+                <img src="{{ this_contact.picture.url }}" width="140" height="140" style="border-radius: 20%"></img>
+            {% endif %}
+
+            {% if this_contact.picture != '' %}
+            <div>
+                </br>
+                <a type="button" class="btn btn-outline-warning" href="/contacts/remove_pic/{{ this_contact.id }}">Reset Picture</a>
+            </div>
+            {% endif %}
         </div>
     </div>
 
@@ -23,6 +36,7 @@
                 <br/>
             {% endfor %}
             <input class="btn btn-info" type="submit" name="submit" value="Edit Contact" />
+            <a type="button" class="btn btn-outline-dark" href="/contacts/con/{{ this_contact.id }}">Cancel</a>
         </form>
     </div>
 

@@ -16,7 +16,6 @@
                 <h5>{{ org.city }}, {{ org.country }}</h5>
                 <h5>{{ org.email }}</h5>
                 <div>
-                    <a type="button" class="btn btn-outline-success" href="/contacts/new_con/">Add</a>
                     <a type="button" class="btn btn-outline-warning" href="/contacts/edit_org/{{ org.slug }}">Edit</a>
                 </div>
             </div>
@@ -34,7 +33,7 @@
                         {% else %}
                             <img src="{{ c.picture.url }}" width="140" height="140" style="border-radius: 20%"></img>
                         {% endif %}
-                        <h2>{{ c.name }}</h2>
+                        <h2><a href="{% url 'show_con' c.id %}">{{ c.name }}</a></h2>
                         <a class="btn btn-outline-success" data-toggle="collapse" href="#multiCollapse{{ c.id }}" role="button" aria-expanded="false" aria-controls="multiCollapse{{ c.id }}"><i class="fas fa-eye"></i></a>
                         <a type="button" class="btn btn-outline-warning" href="/contacts/edit_con/{{ c.id }}"><i class="fas fa-edit"></i></a>
                         <a type="button" class="btn btn-outline-danger" href="/contacts/del_con/{{ c.id }}"><i class="fas fa-trash"></i></a>
